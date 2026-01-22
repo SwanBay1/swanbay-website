@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SwanBay Property</title>
+  <meta name="description" content="SwanBay Property — rentals and holiday homes across Swansea Bay." />
+
+  <style>
+    :root{
+      --ink:#0b0f16;
+      --muted:#5b667a;
+      --line:rgba(11,15,22,.12);
+      --paper:#ffffff;
+      --max:1100px;
+
+      /* Accent */
+      --accent:#2563eb; /* clean, SpareRoom-ish blue */
+      --btn-grad: linear-gradient(270deg, #22d3ee 0%, #2563eb 100%); /* cyan -> blue (right to left) */
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: "Times New Roman", Times, serif;
+      color:var(--ink);
+      background: var(--paper);
+    }
+
+    .container{
+      width:min(var(--max), calc(100% - 40px));
+      margin-inline:auto;
+    }
+
+    /* Header: larger logo + larger nav text */
+    header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid rgba(11,15,22,.08);
+    }
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 22px 0;
+      gap:14px;
+      min-height: 128px; /* bigger header */
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      text-decoration:none;
+      color:inherit;
+    }
+    .brand img{
+      height: 90px; /* bigger logo */
+      width:auto;
+      display:block;
+    }
+
+    .links{
+      display:flex;
+      gap:18px;
+      align-items:center;
+      font-size:18px; /* bigger "Options" and "Contact" */
+    }
+    .links a{
+      color:var(--muted);
+      text-decoration:none;
+      padding:10px 12px;
+      border-radius:12px;
+    }
+    .links a:hover{
+      background: rgba(11,15,22,.05);
+      color: var(--ink);
+    }
+
+    /* Hero image block */
+    .hero{
+      position:relative;
+      padding: 26px 0 0;
+      overflow:hidden;
+    }
+    .hero-image{
+      position:absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 580px; /* taller banner so more of the image shows */
+      z-index:0;
+      overflow:hidden;
+      border-bottom: 1px solid rgba(11,15,22,.08);
+      background:#f4f6fb;
+    }
+    .hero-image::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.55) 70%, rgba(255,255,255,.92) 100%);
+      pointer-events:none;
+    }
+    .hero-image img{
+      width:100%;
+      height:100%;
+      object-fit: cover;     /* crops depending on screen ratio */
+      object-position: center;
+      display:block;
+    }
+
+    .hero-content{
+      position:relative;
+      z-index:1;
+      padding-top: 110px; /* balance for taller banner */
+      padding-bottom: 22px;
+      text-align:center;
+    }
+
+    h1{
+      margin:0;
+      font-size: clamp(38px, 4.2vw, 60px);
+      letter-spacing:-0.02em;
+      line-height:1.05;
+    }
+    .sub{
+      margin: 12px auto 0;
+      max-width: 70ch;
+      color:var(--muted);
+      font-size: 18px;
+      line-height:1.6;
+    }
+
+    /* Divider like SpareRoom */
+    .divider{
+      margin: 28px auto 0;
+      height:1px;
+      width:min(980px, 100%);
+      background: rgba(11,15,22,.10);
+    }
+
+    /* Options section */
+    .info{
+      padding: 34px 0 18px;
+    }
+
+    .info-title{
+      margin: 0 0 22px;
+      text-align:center;
+      font-size: 36px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--accent);
+    }
+
+    .info-grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 26px;
+      align-items: start;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(11,15,22,.10);
+    }
+
+    .feature{
+      grid-column: span 4; /* now three columns */
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
+      padding: 10px 8px 14px;
+    }
+
+    .icon-slot{
+      width: 120px;
+      height: 120px;
+      display:grid;
+      place-items:center;
+      margin-bottom: 12px;
+    }
+    .icon-slot img{
+      width:100%;
+      height:100%;
+      object-fit: contain;
+      display:block;
+    }
+    .icon-fallback{
+      width: 96px;
+      height: 96px;
+      border-radius: 999px;
+      border: 2px solid rgba(37,99,235,.35);
+      display:grid;
+      place-items:center;
+      color: rgba(37,99,235,.8);
+      font-size: 14px;
+    }
+
+    .feature h3{
+      margin: 6px 0 6px;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .feature p{
+      margin: 0;
+      max-width: 44ch;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .feature-link{
+      margin-top: 14px;
+      text-decoration:none;
+      color: inherit;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .cta{
+      border: 1px solid rgba(11,15,22,.12);
+      background: #fff;
+      padding: 16px 16px;
+      border-radius: 14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow: 0 14px 28px rgba(11,15,22,.08);
+      transition: transform .12s ease, box-shadow .12s ease;
+      position:relative;
+      overflow:hidden;
+    }
+    .cta::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: var(--btn-grad);
+      opacity:.16;
+    }
+    .cta:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(11,15,22,.12);
+    }
+    .cta span{
+      position:relative;
+      z-index:1;
+      font-weight:700;
+      letter-spacing:.2px;
+      color: var(--ink);
+      font-size: 18px; /* larger "Browse ..." text */
+    }
+
+    footer{
+      padding: 28px 0 40px;
+      color: var(--muted);
+      font-size: 14px;
+      border-top: 1px solid rgba(11,15,22,.08);
+      margin-top: 28px;
+      display:flex;
+      justify-content:space-between;
+      gap: 12px;
+      flex-wrap:wrap;
+    }
+
+    @media (max-width: 980px){
+      .feature{ grid-column: span 6; } /* 2 across */
+    }
+    @media (max-width: 860px){
+      .feature{ grid-column: span 12; } /* stack */
+      .info-title{ font-size: 32px; }
+    }
+    @media (max-width: 720px){
+      .hero-image{ height: 380px; }
+      .hero-content{ padding-top: 90px; }
+      .nav{ min-height: 118px; }
+      .brand img{ height: 78px; }
+      .links{ font-size: 16px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <nav class="nav" aria-label="Primary">
+        <a class="brand" href="index.html" aria-label="SwanBay Home">
+          <!-- Website/Assets/Logo.png -->
+          <img src="Assets/Logo.png" alt="SwanBay.co.uk logo" />
+        </a>
+
+        <div class="links">
+          <a href="#options">Options</a>
+          <a href="mailto:info@swanbay.co.uk">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero with background image -->
+    <section class="hero" aria-label="Welcome">
+      <div class="hero-image" aria-hidden="true">
+        <!-- Website/Assets/SwanBG1.png -->
+        <img src="Assets/SwanBG1.png" alt="" />
+      </div>
+
+      <div class="container">
+        <div class="hero-content">
+          <h1>Swansea Bay Property</h1>
+          <p class="sub">email info@swanbay.co.uk</p>
+
+          <div class="divider" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Icons + text section -->
+    <section class="info" id="options" aria-label="Choose an option">
+      <div class="container">
+        <h2 class="info-title">What are you looking for today?</h2>
+
+        <div class="info-grid">
+          <!-- RENT -->
+          <div class="feature">
+            <div class="icon-slot" aria-label="Rent icon">
+              <img src="Assets/RentIcon.png" alt="Rent icon"
+                   onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';">
+              <div class="icon-fallback" style="display:none;">Rent</div>
+            </div>
+
+            <h3>Rentals</h3>
+            <p>
+              Six months plus
+            </p>
+
+            <a class="feature-link" href="Rental.html" aria-label="Go to rentals page">
+              <div class="cta"><span>Browse rentals</span></div>
+            </a>
+          </div>
+
+          <!-- HOLIDAY -->
+          <div class="feature">
+            <div class="icon-slot" aria-label="Holiday icon">
+              <img src="Assets/HolidayIcon.png" alt="Holiday homes icon"
+                   onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';">
+              <div class="icon-fallback" style="display:none;">Holiday</div>
+            </div>
+
+            <h3>Holiday homes</h3>
+            <p>
+              Up to a month
+            </p>
+
+            <a class="feature-link" href="holiday.html" aria-label="Go to holiday homes page">
+              <div class="cta"><span>Browse holiday homes</span></div>
+            </a>
+          </div>
+
+          <!-- SHORT TERM LETS -->
+          <div class="feature">
+            <div class="icon-slot" aria-label="Short term lets icon">
+              <img src="Assets/ShortTermIcon.png" alt="Short term lets icon"
+                   onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';">
+              <div class="icon-fallback" style="display:none;">Short</div>
+            </div>
+
+            <h3>Long stays</h3>
+            <p>
+             One month plus
+</p>
+
+            <a class="feature-link" href="LongTermLet.html" aria-label="Go to short term lets page">
+              <div class="cta"><span>Browse long stays</span></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <footer>
+        <div>© <span id="year"></span> SwanBay Property</div>
+        <div><a href="mailto:info@swanbay.co.uk" style="color:inherit;text-decoration:none;">info@swanbay.co.uk</a></div>
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

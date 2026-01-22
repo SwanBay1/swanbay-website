@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Rental Properties | SwanBay Property</title>
+  <meta name="description" content="SwanBay Property — rental listings across Swansea Bay." />
+
+  <style>
+    :root{
+      --ink:#0b0f16;
+      --muted:#5b667a;
+      --line:rgba(11,15,22,.12);
+      --paper:#ffffff;
+      --max:1100px;
+
+      --accent:#2563eb;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family:"Times New Roman", Times, serif;
+      color:var(--ink);
+      background:var(--paper);
+    }
+
+    .container{
+      width:min(var(--max), calc(100% - 40px));
+      margin-inline:auto;
+    }
+
+    /* Header (same look as your index page header) */
+    header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid rgba(11,15,22,.08);
+    }
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:22px 0;
+      gap:14px;
+      min-height:128px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      text-decoration:none;
+      color:inherit;
+    }
+    .brand img{
+      height:90px;
+      width:auto;
+      display:block;
+    }
+    .links{
+      display:flex;
+      gap:18px;
+      align-items:center;
+      font-size:18px;
+    }
+    .links a{
+      color:var(--muted);
+      text-decoration:none;
+      padding:10px 12px;
+      border-radius:12px;
+    }
+    .links a:hover{
+      background: rgba(11,15,22,.05);
+      color:var(--ink);
+    }
+
+    /* Page layout */
+    main{
+      padding: 26px 0 50px;
+    }
+
+    .page-head{
+      padding: 8px 0 18px;
+      border-bottom: 1px solid rgba(11,15,22,.08);
+      margin-bottom: 16px;
+    }
+    .page-head h1{
+      margin:0;
+      font-size: 34px;
+      letter-spacing:-0.01em;
+      color: var(--accent);
+      font-weight: 400;
+    }
+    .page-head p{
+      margin:10px 0 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.6;
+      max-width: 80ch;
+    }
+
+    /* Dropdown-style list (from your earlier version) */
+    .list{
+      border-top: 1px solid var(--line);
+    }
+
+    .row{
+      display:grid;
+      grid-template-columns: 110px 1fr auto;
+      gap: 14px;
+      align-items:center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+      text-decoration:none;
+      color:inherit;
+    }
+    .row:hover{
+      background: rgba(11,15,22,.03);
+    }
+
+    .thumb{
+      width:110px;
+      height:72px;
+      overflow:hidden;
+      background:#eef2ff;
+      border: 1px solid rgba(11,15,22,.10);
+    }
+    .thumb img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      object-position:center;
+      display:block;
+    }
+
+    .row-main{
+      min-width:0;
+    }
+    .row-title{
+      margin:0;
+      font-size: 16px;
+      line-height:1.25;
+      letter-spacing:-0.01em;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .row-meta{
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 14px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      line-height:1.5;
+    }
+
+    .row-side{
+      text-align:right;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      align-items:flex-end;
+      min-width: 180px;
+    }
+
+    .status{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 13px;
+      border: 1px solid rgba(11,15,22,.12);
+      background: rgba(255,255,255,.9);
+      color: var(--ink);
+      white-space:nowrap;
+    }
+    .status::before{
+      content:"";
+      width:8px;
+      height:8px;
+      border-radius:999px;
+      background: rgba(11,15,22,.35);
+      flex: 0 0 auto;
+    }
+
+    /* Status variants */
+    .status.available{
+      border-color: rgba(34,197,94,.25);
+      background: rgba(34,197,94,.10);
+      color: #0f5132;
+    }
+    .status.available::before{ background: #22c55e; }
+
+    .status.reservations{
+      border-color: rgba(37,99,235,.25);
+      background: rgba(37,99,235,.10);
+      color: #1e3a8a;
+    }
+    .status.reservations::before{ background: #2563eb; }
+
+    .status.unavailable{
+      border-color: rgba(107,114,128,.25);
+      background: rgba(107,114,128,.10);
+      color: #374151;
+    }
+    .status.unavailable::before{ background: #6b7280; }
+
+    .price{
+      font-weight:700;
+      font-size: 14px;
+      color: var(--ink);
+      white-space:nowrap;
+    }
+
+    @media (max-width: 720px){
+      .row{
+        grid-template-columns: 96px 1fr;
+      }
+      .row-side{
+        grid-column: 2 / 3;
+        align-items:flex-start;
+        text-align:left;
+        min-width: 0;
+      }
+      .thumb{ width:96px; height:64px; }
+      .links{ font-size:16px; }
+      .brand img{ height:78px; }
+      .nav{ min-height:118px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <nav class="nav" aria-label="Primary">
+        <a class="brand" href="index.html" aria-label="SwanBay Home">
+          <img src="Assets/Logo.png" alt="SwanBay.co.uk logo" />
+        </a>
+
+        <div class="links">
+          <!-- Keep this consistent with the rest of your site.
+               On this page, "Options" takes you back to the home page options section. -->
+          <a href="index.html#options">Options</a>
+          <a href="mailto:info@swanbay.co.uk">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="page-head">
+        <h1>Holiday stays</h1>
+    
+      </div>
+
+      <div class="list" id="rentalsList" aria-live="polite"></div>
+    </div>
+  </main>
+
+  <script>
+    // If you don't set an image for a property, this placeholder will be used.
+    // File: Website/Assets/Placeholder.png
+    const PLACEHOLDER = "Assets/Placeholder.png";
+
+    // ✅ Easy to add/remove listings:
+    // Just add/remove objects in this array.
+    // status must be one of:
+    // "Currently available" | "Accepting reservations" | "Currently Unavailable"
+    const RENTAL_PROPERTIES = [
+      {
+        title: "Coming Soon...",
+        area: "Swansea.",
+        price: "?",
+        beds: 1,
+        baths: 2,
+        status: "Currently unavailable",
+        href: "smt.html",
+        image: "Assets/smt.jpeg"
+          }
+
+    ];
+
+    function escapeHtml(s){
+      const d = document.createElement("div");
+      d.textContent = s;
+      return d.innerHTML;
+    }
+
+    function bedLabel(n){
+      if (n === 0) return "Studio";
+      if (n === 1) return "1 bed";
+      return `${n} beds`;
+    }
+
+    function statusClass(status){
+      const s = (status || "").toLowerCase();
+      if (s.includes("currently available")) return "available";
+      if (s.includes("accepting reservations")) return "reservations";
+      return "unavailable";
+    }
+
+    const list = document.getElementById("rentalsList");
+
+    function render(){
+      list.innerHTML = RENTAL_PROPERTIES.map(p => {
+        const title = escapeHtml(p.title);
+        const area  = escapeHtml(p.area);
+        const price = escapeHtml(p.price);
+        const href  = escapeHtml(p.href || "#");
+        const img   = (p.image && p.image.trim().length) ? escapeHtml(p.image) : PLACEHOLDER;
+
+        const statusText = escapeHtml(p.status || "Currently Unavailable");
+        const sClass = statusClass(p.status);
+
+        return `
+          <a class="row" href="${href}" aria-label="Open ${title}">
+            <div class="thumb" aria-hidden="true">
+              <img src="${img}" alt="">
+            </div>
+
+            <div class="row-main">
+              <h3 class="row-title">${title}</h3>
+              <div class="row-meta">
+                <span>${area}</span>
+                <span aria-hidden="true">•</span>
+                <span>${bedLabel(p.beds)} • ${p.baths} bath${p.baths === 1 ? "" : "s"}</span>
+              </div>
+            </div>
+
+            <div class="row-side">
+              <div class="status ${sClass}">${statusText}</div>
+              <div class="price">${price}</div>
+            </div>
+          </a>
+        `;
+      }).join("");
+    }
+
+    render();
+  </script>
+</body>
+</html>

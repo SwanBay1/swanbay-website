@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Baytree House | SwanBay Property</title>
+  <meta name="description" content="Baytree House — Double bed - top of house, 125 Rhondda st. (SwanBay Property)" />
+
+  <style>
+    :root{
+      --ink:#0b0f16;
+      --muted:#5b667a;
+      --line:rgba(11,15,22,.12);
+      --paper:#ffffff;
+      --max:1100px;
+
+      --accent:#2563eb;
+      --btn-grad: linear-gradient(270deg, #22d3ee 0%, #2563eb 100%);
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family:"Times New Roman", Times, serif;
+      color:var(--ink);
+      background:var(--paper);
+    }
+
+    .container{
+      width:min(var(--max), calc(100% - 40px));
+      margin-inline:auto;
+    }
+
+    /* Header */
+    header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid rgba(11,15,22,.08);
+    }
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:22px 0;
+      gap:14px;
+      min-height:128px;
+    }
+    .brand img{ height:90px; }
+    .links{
+      display:flex;
+      gap:18px;
+      font-size:18px;
+    }
+    .links a{
+      color:var(--muted);
+      text-decoration:none;
+      padding:10px 12px;
+      border-radius:12px;
+    }
+    .links a:hover{ background:rgba(11,15,22,.05); color:var(--ink); }
+
+    main{ padding:22px 0 52px; }
+
+    .top-actions{ margin-bottom:14px; }
+    .back-btn{
+      text-decoration:none;
+      color:var(--ink);
+      border:1px solid rgba(11,15,22,.12);
+      border-radius:14px;
+      padding:12px 14px;
+      font-weight:700;
+      box-shadow:0 12px 26px rgba(11,15,22,.08);
+      display:inline-flex;
+    }
+
+    .page-head{
+      border-bottom:1px solid rgba(11,15,22,.08);
+      margin-bottom:18px;
+    }
+    .page-head h1{
+      font-size:38px;
+      color:var(--accent);
+      font-weight:400;
+    }
+    .subhead{
+      color:var(--muted);
+      font-size:18px;
+      margin-top:8px;
+    }
+
+    .layout{
+      display:grid;
+      grid-template-columns:1.25fr .75fr;
+      gap:22px;
+    }
+    @media (max-width:900px){ .layout{ grid-template-columns:1fr; } }
+
+    /* Gallery */
+    .gallery{
+      border:1px solid rgba(11,15,22,.10);
+      box-shadow:0 14px 34px rgba(11,15,22,.08);
+    }
+    .gallery-frame{
+      aspect-ratio:4/3;
+      position:relative;
+      overflow:hidden;
+      background:#f3f4f6;
+    }
+    .gallery-frame img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .gallery-nav{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      width:44px;
+      height:44px;
+      border-radius:999px;
+      background:rgba(255,255,255,.88);
+      border:1px solid rgba(11,15,22,.12);
+      cursor:pointer;
+    }
+    .gallery-nav.prev{ left:12px; }
+    .gallery-nav.next{ right:12px; }
+
+    .counter{
+      position:absolute;
+      bottom:12px;
+      right:12px;
+      background:rgba(11,15,22,.55);
+      color:#fff;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:13px;
+    }
+
+    .thumbs{
+      display:flex;
+      gap:10px;
+      padding:12px;
+      border-top:1px solid rgba(11,15,22,.08);
+      overflow-x:auto;
+    }
+    .thumbs button{
+      width:84px;
+      height:58px;
+      border:1px solid rgba(11,15,22,.12);
+      padding:0;
+      cursor:pointer;
+    }
+    .thumbs img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    /* Info panel */
+    .info{
+      border:1px solid rgba(11,15,22,.10);
+      box-shadow:0 14px 34px rgba(11,15,22,.08);
+      padding:18px;
+    }
+    .info h2{ font-size:22px; }
+
+    .meta{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.6;
+    }
+    .divider{
+      height:1px;
+      background:rgba(11,15,22,.10);
+      margin:14px 0;
+    }
+
+    /* CONTACT SECTION (NEW) */
+    .contact{
+      margin-top:14px;
+      padding:14px 16px;
+      border:1px solid rgba(37,99,235,.25);
+      background:rgba(37,99,235,.06);
+      border-radius:14px;
+    }
+    .contact h3{
+      margin:0 0 8px;
+      font-size:20px;
+      color:var(--accent);
+      font-weight:700;
+    }
+    .contact p{
+      margin:4px 0;
+      font-size:16px;
+      color:var(--ink);
+    }
+    .contact strong{ font-weight:700; }
+
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="container">
+    <nav class="nav">
+      <a class="brand" href="index.html">
+        <img src="Assets/Logo.png" alt="SwanBay logo">
+      </a>
+      <div class="links">
+        <a href="index.html#options">Options</a>
+        <a href="mailto:info@swanbay.co.uk">Contact</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <div class="top-actions">
+      <a class="back-btn" href="Rental.html">← Rentals</a>
+    </div>
+
+    <div class="page-head">
+      <h1>Baytree House</h1>
+      <div class="subhead">Double bed - front of house • 125 Rhondda st.</div>
+    </div>
+
+    <div class="layout">
+      <!-- Gallery -->
+      <section class="gallery">
+        <div class="gallery-frame">
+          <button class="gallery-nav prev" id="prevBtn">‹</button>
+          <img id="mainImage" src="" alt="">
+          <button class="gallery-nav next" id="nextBtn">›</button>
+          <div class="counter" id="counter">1 / 6</div>
+        </div>
+        <div class="thumbs" id="thumbs"></div>
+      </section>
+
+      <!-- Info -->
+      <aside class="info">
+        <h2>About this room</h2>
+
+        <div class="meta">
+          <div><strong>Property:</strong> Baytree House</div>
+          <div><strong>Room:</strong> Double bed - front of house</div>
+          <div><strong>Location:</strong> 125 Rhondda st.</div>
+          <div class="divider"></div>
+      
+        </div>
+
+        <!-- CONTACT US (replaces external buttons) -->
+        <div class="contact">
+          <h3>Contact Us</h3>
+          <p><strong>Email:</strong> info@swanbay.co.uk</p>
+          <p><strong>Phone:</strong> 07739 845377</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<script>
+  const images = [
+    "Assets/125RhonddaSt/UpstairsMiddle/1UM.jpg",
+    "Assets/125RhonddaSt/UpstairsMiddle/2UM.jpg",
+    "Assets/125RhonddaSt/UpstairsMiddle/3UM.jpg",
+    "Assets/125RhonddaSt/UpstairsMiddle/4UM.jpg",
+    "Assets/125RhonddaSt/UpstairsMiddle/5UM.jpg",
+    "Assets/125RhonddaSt/UpstairsMiddle/6UM.jpg"
+  ];
+
+  const mainImage = document.getElementById("mainImage");
+  const counter = document.getElementById("counter");
+  const thumbs = document.getElementById("thumbs");
+  let current = 0;
+
+  function show(i){
+    current = (i + images.length) % images.length;
+    mainImage.src = images[current];
+    counter.textContent = `${current + 1} / ${images.length}`;
+    [...thumbs.children].forEach((b,idx)=>b.classList.toggle("active",idx===current));
+  }
+
+  document.getElementById("prevBtn").onclick=()=>show(current-1);
+  document.getElementById("nextBtn").onclick=()=>show(current+1);
+
+  thumbs.innerHTML = images.map((src,i)=>`
+    <button onclick="show(${i})"><img src="${src}"></button>
+  `).join("");
+
+  show(0);
+</script>
+</body>
+</html>
