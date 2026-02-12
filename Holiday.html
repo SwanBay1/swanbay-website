@@ -32,49 +32,92 @@
     }
 
     /* Header (same look as your index page header) */
-    header{
-      position:sticky;
-      top:0;
-      z-index:50;
-      background: rgba(255,255,255,.92);
-      backdrop-filter: blur(10px);
-      border-bottom:1px solid rgba(11,15,22,.08);
-    }
-    .nav{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:22px 0;
-      gap:14px;
-      min-height:128px;
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      text-decoration:none;
-      color:inherit;
-    }
-    .brand img{
-      height:90px;
-      width:auto;
-      display:block;
-    }
-    .links{
-      display:flex;
-      gap:18px;
-      align-items:center;
-      font-size:18px;
-    }
-    .links a{
-      color:var(--muted);
-      text-decoration:none;
-      padding:10px 12px;
-      border-radius:12px;
-    }
-    .links a:hover{
-      background: rgba(11,15,22,.05);
-      color:var(--ink);
-    }
+   /* Header (same look as your index page header) */
+header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(10px);
+  border-bottom:1px solid rgba(11,15,22,.08);
+}
+
+.nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:22px 0;
+  gap:14px;
+  min-height:128px;
+
+  /* ✅ allow wrapping so mobile can stack without stretching */
+  flex-wrap:wrap;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  text-decoration:none;
+  color:inherit;
+
+  /* ✅ let brand shrink/grow without forcing overflow */
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+.brand img{
+  /* ✅ responsive logo sizing (keeps your desktop size, shrinks on mobile) */
+  height: clamp(56px, 10vw, 90px);
+  width: auto;
+  max-width: min(320px, 80vw);
+  display:block;
+  object-fit: contain;
+}
+
+.links{
+  display:flex;
+  gap:18px;
+  align-items:center;
+  font-size:18px;
+
+  /* ✅ allow buttons to wrap instead of widening the page */
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+
+.links a{
+  color:var(--muted);
+  text-decoration:none;
+  padding:10px 12px;
+  border-radius:12px;
+  white-space:nowrap; /* keeps each button tidy */
+}
+
+.links a:hover{
+  background: rgba(11,15,22,.05);
+  color:var(--ink);
+}
+
+@media (max-width: 720px){
+  /* ✅ stack logo then links within the header */
+  .nav{
+    justify-content:center;
+    min-height: auto;          /* remove forced height that can feel tight */
+    padding:16px 0;
+  }
+
+  .brand{
+    width:100%;
+    justify-content:center;
+  }
+
+  .links{
+    width:100%;
+    justify-content:center;
+    gap:10px;
+    font-size:16px;
+  }
+}
 
     /* Page layout */
     main{

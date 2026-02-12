@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Baytree House | SwanBay Property</title>
-  <meta name="description" content="Baytree House — Double bed - front of house, 125 Rhondda st. (SwanBay Property)" />
+  <meta name="description" content="Baytree House — Double bed - top of house, 125 Rhondda st. (SwanBay Property)" />
 
   <style>
     :root{
@@ -33,64 +33,93 @@
     }
 
     /* Header */
-    header{
-      position:sticky;
-      top:0;
-      z-index:50;
-      background: rgba(255,255,255,.92);
-      backdrop-filter: blur(10px);
-      border-bottom:1px solid rgba(11,15,22,.08);
-    }
-    .nav{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:22px 0;
-      gap:14px;
-      min-height:128px;
-    }
-    .brand img{ height:90px; }
-    .links{
-      display:flex;
-      gap:18px;
-      font-size:18px;
-    }
-    .links a{
-      color:var(--muted);
-      text-decoration:none;
-      padding:10px 12px;
-      border-radius:12px;
-    }
-    .links a:hover{ background:rgba(11,15,22,.05); color:var(--ink); }
+   /* Header (same look as your index page header) */
+header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(10px);
+  border-bottom:1px solid rgba(11,15,22,.08);
+}
 
-    main{ padding:22px 0 52px; }
+.nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:22px 0;
+  gap:14px;
+  min-height:128px;
 
-    .top-actions{ margin-bottom:14px; }
-    .back-btn{
-      text-decoration:none;
-      color:var(--ink);
-      border:1px solid rgba(11,15,22,.12);
-      border-radius:14px;
-      padding:12px 14px;
-      font-weight:700;
-      box-shadow:0 12px 26px rgba(11,15,22,.08);
-      display:inline-flex;
-    }
+  /* ✅ allow wrapping so mobile can stack without stretching */
+  flex-wrap:wrap;
+}
 
-    .page-head{
-      border-bottom:1px solid rgba(11,15,22,.08);
-      margin-bottom:18px;
-    }
-    .page-head h1{
-      font-size:38px;
-      color:var(--accent);
-      font-weight:400;
-    }
-    .subhead{
-      color:var(--muted);
-      font-size:18px;
-      margin-top:8px;
-    }
+.brand{
+  display:flex;
+  align-items:center;
+  text-decoration:none;
+  color:inherit;
+
+  /* ✅ let brand shrink/grow without forcing overflow */
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+.brand img{
+  /* ✅ responsive logo sizing (keeps your desktop size, shrinks on mobile) */
+  height: clamp(56px, 10vw, 90px);
+  width: auto;
+  max-width: min(320px, 80vw);
+  display:block;
+  object-fit: contain;
+}
+
+.links{
+  display:flex;
+  gap:18px;
+  align-items:center;
+  font-size:18px;
+
+  /* ✅ allow buttons to wrap instead of widening the page */
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+
+.links a{
+  color:var(--muted);
+  text-decoration:none;
+  padding:10px 12px;
+  border-radius:12px;
+  white-space:nowrap; /* keeps each button tidy */
+}
+
+.links a:hover{
+  background: rgba(11,15,22,.05);
+  color:var(--ink);
+}
+
+@media (max-width: 720px){
+  /* ✅ stack logo then links within the header */
+  .nav{
+    justify-content:center;
+    min-height: auto;          /* remove forced height that can feel tight */
+    padding:16px 0;
+  }
+
+  .brand{
+    width:100%;
+    justify-content:center;
+  }
+
+  .links{
+    width:100%;
+    justify-content:center;
+    gap:10px;
+    font-size:16px;
+  }
+}
+
 
     .layout{
       display:grid;
@@ -223,7 +252,7 @@
 <main>
   <div class="container">
     <div class="top-actions">
-      <a class="back-btn" href="Rental.html">← Rentals</a>
+      <a class="back-btn" href="LongTermLet.html">← Long term lets</a>
     </div>
 
     <div class="page-head">
@@ -252,7 +281,7 @@
           <div><strong>Room:</strong> Double bed - front of house</div>
           <div><strong>Location:</strong> 125 Rhondda st.</div>
           <div class="divider"></div>
-        
+      
         </div>
 
         <!-- CONTACT US (replaces external buttons) -->
@@ -268,12 +297,12 @@
 
 <script>
   const images = [
-    "Assets/125RhonddaSt/DownstairsFront/uf1.jpg",
-    "Assets/125RhonddaSt/DownstairsFront/uf2.jpg",
-    "Assets/125RhonddaSt/DownstairsFront/uf3.jpg",
-    "Assets/125RhonddaSt/DownstairsFront/uf4.jpg",
-    "Assets/125RhonddaSt/DownstairsFront/uf5.jpg",
-    "Assets/125RhonddaSt/DownstairsFront/uf6.jpg"
+    "Assets/125RhonddaSt/UpstairsMiddle/1UM.jpg",
+    "Assets/125RhonddaSt/UpstairsMiddle/2UM.jpg",
+    "Assets/125RhonddaSt/UpstairsMiddle/3UM.jpg",
+    "Assets/125RhonddaSt/UpstairsMiddle/4UM.jpg",
+    "Assets/125RhonddaSt/UpstairsMiddle/5UM.jpg",
+    "Assets/125RhonddaSt/UpstairsMiddle/6UM.jpg"
   ];
 
   const mainImage = document.getElementById("mainImage");
