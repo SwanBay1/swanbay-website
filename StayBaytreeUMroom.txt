@@ -297,12 +297,12 @@ header{
 
 <script>
   const images = [
-    "Assets/125RhonddaSt/UpstairsMiddle/1UM.jpg",
-    "Assets/125RhonddaSt/UpstairsMiddle/2UM.jpg",
-    "Assets/125RhonddaSt/UpstairsMiddle/3UM.jpg",
-    "Assets/125RhonddaSt/UpstairsMiddle/4UM.jpg",
-    "Assets/125RhonddaSt/UpstairsMiddle/5UM.jpg",
-    "Assets/125RhonddaSt/UpstairsMiddle/6UM.jpg"
+    "Assets/125RhonddaSt/UpstairsMiddle/1UM.JPG",
+    "Assets/125RhonddaSt/UpstairsMiddle/2UM.JPG",
+    "Assets/125RhonddaSt/UpstairsMiddle/3UM.JPG",
+    "Assets/125RhonddaSt/UpstairsMiddle/4UM.JPG",
+    "Assets/125RhonddaSt/UpstairsMiddle/5UM.JPG",
+    "Assets/125RhonddaSt/UpstairsMiddle/6UM.JPG"
   ];
 
   const mainImage = document.getElementById("mainImage");

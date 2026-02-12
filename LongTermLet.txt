@@ -327,7 +327,7 @@
         status: "Accepting reservations",
         availableFrom: "2026-04-10",
         href: "StayBaytreeUFroom.html",
-        image: "Assets/uf1.jpeg"
+        image: "Assets/uf1.JPEG"
       },
       {
         title: "Baytree House - Double bed - top floor room",
@@ -337,7 +337,7 @@
         baths: 2,
         status: "Currently available",
         href: "StayBaytreeUMroom.html",
-        image: "Assets/125RhonddaSt/UpstairsMiddle/1UM.jpg"
+        image: "Assets/125RhonddaSt/UpstairsMiddle/1UM.JPG"
       }
     ];
 
